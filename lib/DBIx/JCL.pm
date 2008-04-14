@@ -17,7 +17,7 @@ DBIx-JCL - Job Control Library for Data Management Tasks
 
 !1 Version
 
-This is version 0.04
+This is version 0.06
 
 ----
 
@@ -1039,7 +1039,7 @@ use DBI;
 # version
 # ------------------------------------------------------------------------------
 
-our $VERSION = "0.04";
+our $VERSION = "0.06";
 
 # const exports
 # ------------------------------------------------------------------------------
