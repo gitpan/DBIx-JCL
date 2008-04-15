@@ -20,6 +20,6 @@ WriteMakefile(
                            'DBI' => 0,
                          }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-      (ABSTRACT       => 'Job Control Library for Data Management Tasks',
+      (ABSTRACT_FROM  => 'lib/DBIx-JCL.pm', # retrieve abstract from module
        AUTHOR         => 'Brad Adkins <dbijcl@gmail.com>') : ()),
 );

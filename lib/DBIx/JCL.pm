@@ -7,17 +7,248 @@
 ##toc:yes
 ##header:<h1>DBIx-JCL</h1>
 
+=head1 NAME
+
+DBIx-JCL - Job Control Library for database load tasks.
+
+=head1 SYNOPSIS
+
+    # file: test_job.pl
+    use strict;
+    use warnings;
+    use DBIx::JCL qw( :all );
+
+    my $jobname = 'name_of_job';
+    sys_init( $jobname );
+
+    # perform database tasks calling DBIx-JCL functions
+    # ...
+
+    sys_end();
+    exit sys_get_errorlevel();
+
+=head1 DESCRIPTION
+
+This documentation describes the perl module DBIx-JCL.pm and the use of
+standardized perl scripts which together provide a common job execution
+environment to support database backend load and maintenance tasks.
+
+=head1 RATIONALE
+
+Provide a suite of standard functions that can be shared across all batch
+job scripts used to support database back end tasks. Provide a standardized
+approach for the development of all back end database job scripts.
+Centralize the administration and access to configuration data. Enforce
+coding standards and documentation. Abstract the sql used to support back
+end processes from the task processing logic, by placing all sqlinto an sql
+library. This will make maintenance of back end sql a trivial task. Provide
+generalized logging, notification, and system information functions.
+
+If you want to write a robust database extract and load job with complete
+support for logging and error notification, and do it in 25 lines of code,
+read on.
+
+=head1 OPTIONS
+
+Database maintenance and load jobs written using DBIx-JCL support the following
+options out-of-the-box, with no additional work required on your part.
+
+Job Options:
+
+    | -r   | Run job
+    | -rb  | Run job in the background
+    | -rs  | Run job at requested start time
+    | -rr  | Restart job after failure
+    | -rde | Run using specified DE number
+    | -x   | Pass extra parameters to job script
+    | -c   | Specify database connections
+    | -v   | Verbose
+    | -vv  | Very Verbose
+    | -ng  | No greeting
+    | -tc  | Test database connections
+
+Logging Options:
+
+    | -lf  | Log filename
+    | -lg  | Log generations
+    | -ll  | Log log levels
+    | -lp  | Log file prefix
+    | -lr  | Log archive file radix
+    | -cl  | Log console levels
+
+Notificaiton Options:
+
+    | -ne  | Notify email on completion
+    | -np  | Notify pager on completion
+    | -et  | Email notification to list
+    | -el  | Email notification levels
+    | -pt  | Pager notification to list
+    | -pl  | Pager notification levels
+
+Information Options:
+
+    | -dp  | Display job parameters
+    | -dq  | Display job querys
+    | -dd  | Display job documentation
+    | -dl  | Display last log file
+    | -da  | Display archived log files
+    | -dj  | Display a list of job scripts
+    | -dja | Diaplay jobs active in the system
+
+Utility Options:
+
+    | -se  | Send email message
+    | -sp  | Send pager message
+    | -um  | Util no move files
+    | -h   | Help
+    | -ha  | Help on option arguments
+
+Please see L<ADDITIONAL INFORMATION> below.
+
+=head1 CAPABILITIES
+
+The DBIx-JCL modules provides many capabilities commonly needed in support of
+database maintenance jobs designed to run in a production environment. Below
+is a summary list of features and the types of functions provided to support
+those features.
+
+=head2 Features
+
+The following features have been designed in to the DBIx-JCL module:
+
+=over 4
+
+=item * Logging support with log file rotation
+
+=item * Notification support
+
+=item * Simplified DBI interface
+
+=item * Configuration data stored externally
+
+=item * High level functions not available in the DBI
+
+=item * SQL stored in "SQL books"
+
+=item * Job documentation enforced
+
+=item * Job control functions
+
+=item * Plugin support
+
+=back
+
+=head2 Implementation
+
+The features listed above have been implemented by providing [many] functions
+for use by your database mantenance jobs:
+
+=over 4
+
+=item * Functions for command line interaction
+
+=item * Functions for initialization, monitoring, and control
+
+=item * Functions for database interaction
+
+=item * Functions for log file access and maintenance
+
+=item * Functions for file manipulation
+
+=back
+
+Please see L<ADDITIONAL INFORMATION> below.
+
+=head1 EXAMPLE JOB
+
+Shown below is the standard approach to writing job scripts.
+
+    ##@@name_of_script.pl,bin
+    ##$$Description of this job
+
+    use strict;
+    use warnings;
+    use DBIx::JCL qw( :all );
+
+    # initialize
+    # -------------------------------------------------------------------------
+
+    my $jobname = 'name_of_script';
+    sys_init( $jobname );
+
+    my $dbenv1 = 'mydb1';
+    my $mysql1 = sys_get_sql( 'query_number_1' );
+
+    # main
+    # -------------------------------------------------------------------------
+
+    log_info( sys_get_dbdescr( $dbenv1 ) );
+    db_connect( $dbenv1 );
+
+    # do more db stuff here
+
+    # end
+    # -------------------------------------------------------------------------
+
+    =begin wiki
+
+    !1 NAME
+
+    Name of script
+
+    ----
+
+    !1 DESCRIPTION
+
+    Describe the job script here.
+
+    ----
+
+    !1 RECOVERY NOTES
+
+    Document recovery notes here.
+
+    ----
+
+    !1 DEPENDENCIES
+
+    Document dependencies here.
+
+    =cut
+
+    __END__
+
+Please see L<ADDITIONAL INFORMATION> below.
+
+=head1 ADDITIONAL INFORMATION
+
+Please see the documentation embedded in this source file for [LOTS!] of
+additional details on how to use JCL.pm. You can view this documentation using
+WikiText.pm module to format the WikiText content in this file. Hint: download
+and install WikiText.pm.
+
+Thank you!
+
+=head1 COPYRIGHT
+
+Copyright 2008 Brad Adkins <dbijcl@gmail.com>.
+
+Permission is granted to copy, distribute and/or modify this document under the
+terms of the GNU Free Documentation License, published by the Free Software
+Foundation; with no Invariant Sections, with no Front-Cover Texts, and with no
+Back-Cover Texts.
+
+=head1 AUTHOR
+
+Brad Adkins, dbijcl@gmail.com
+
+=cut
+
 =begin wiki
 
 !1 Name
 
-DBIx-JCL - Job Control Library for Data Management Tasks
-
-----
-
-!1 Version
-
-This is version 0.06
+DBIx-JCL - Job Control Library for database load tasks.
 
 ----
 
@@ -1039,7 +1270,7 @@ use DBI;
 # version
 # ------------------------------------------------------------------------------
 
-our $VERSION = "0.06";
+our $VERSION = "0.08";
 
 # const exports
 # ------------------------------------------------------------------------------
