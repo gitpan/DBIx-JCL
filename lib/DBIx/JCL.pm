@@ -9,7 +9,7 @@
 
 =head1 NAME
 
-DBIx-JCL - Job Control Library for database load tasks.
+JCL - Job Control Library for database load tasks.
 
 =head1 SYNOPSIS
 
@@ -1270,7 +1270,7 @@ use DBI;
 # version
 # ------------------------------------------------------------------------------
 
-our $VERSION = "0.08";
+our $VERSION = "0.10";
 
 # const exports
 # ------------------------------------------------------------------------------

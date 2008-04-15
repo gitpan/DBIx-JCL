@@ -22,6 +22,14 @@ Initial release.
 
 Sun Apr 13 2008
 
-Added plain old pod for readibility on CPAN.
+Added POD for CPAN.
+
+----
+
+!3 Version 0.10
+
+Tue Apr 15 2008
+
+Fixed Description in POD.
 
 ----
