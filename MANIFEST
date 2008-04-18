@@ -1,8 +1,7 @@
 Changes
 Makefile.PL
 MANIFEST
-README
 META.yml
-License
-t/test.t
+README
+t/01_load.t
 lib/DBIx/JCL.pm

@@ -14,22 +14,24 @@ Revision history for Perl extension DBIx::JCL.
 
 Sun Apr 13, 2008
 
-Initial release.
-
-----
+* Initial release.
 
 !3 Version 0.08
 
-Sun Apr 13 2008
+Sun Apr 13, 2008
 
-Added POD for CPAN.
-
-----
+* Added POD for CPAN.
 
 !3 Version 0.10
 
-Tue Apr 15 2008
+Tue Apr 15, 2008
 
-Fixed Description in POD.
+* Fixed Description in POD.
+
+!3 Version 0.12
+
+Wed Apr 16, 2008
+
+* Fixed tarball permissions problem. Use bsdtar not tar on Windows.
 
 ----
